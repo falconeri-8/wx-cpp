@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 class App : public wxApp
 {
 public:
@@ -121,9 +122,8 @@ void Frame::OnCreateProfile(wxCommandEvent& event)
     string contact = contactCtrl->GetValue().ToStdString();
     string description = descriptionCtrl->GetValue().ToStdString();
 
-    Files profile("profile", &name, &contact, &description);
+    Write("profile", &name, &contact, &description);
     wxMessageBox("Profile created successfully!", "Success", wxOK | wxICON_INFORMATION);
-    profile.display();
 }
 
 void Frame::ShowProfilePanel()
@@ -135,26 +135,42 @@ void Frame::ShowProfilePanel()
 
 wxIMPLEMENT_APP(App);
 
-// class Untitled
-// {
-// private:
-//     string var = "alphabet";
-//     public:
-//     string get()
-//     {
-//         return var;
-//     }
-//     void set(string newvar)
-//     {
-//         var = newvar;
-//     }
-//     ~Untitled() {}
-// };
-//
-// int main()
-// {
-//     Untitled untitled;
-//     Files file("untitled", &untitled.get());
-//
-//     return 0;
-// }
+
+/*class Class
+{
+    string variable;
+public:
+    Class() : variable("") {}
+    Class(string variable) : variable(variable) {}
+    string& getVariable()
+    {
+        return variable;
+    }
+    void setVariable(string variable)
+    {
+        this->variable = variable;
+    }
+};
+
+int main()
+{
+
+    vector <Class> Objects;
+    Class Object;
+    Object.setVariable("Hello World");
+    Write("data.txt", &Object.getVariable());
+    Read("data.txt", &Object.getVariable());
+
+     vector <string> Rows;
+     Fetch("data.txt", Rows);
+     for (auto& row : Rows)
+     {
+         Class Object(row);
+         Objects.push_back(Object);
+         cout << Object.getVariable() << endl;
+     }
+
+    return 0;
+}*/
+
+

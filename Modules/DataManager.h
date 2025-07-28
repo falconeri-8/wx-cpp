@@ -1,30 +1,51 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
-class Files
-{
-private:
-    vector<string*> members;
-    vector<string> files;
-public:
-    Files(){};
-    template <typename... Types>
-    Files(string name, Types*... dataMembers)
-    {
-       files.push_back(name+".txt");
-        (members.push_back(dataMembers), ...);
-
+//class Files {
+//public:
+    template<typename... Args>
+    static void Write(const string& filename, Args*... vars) {
+        ofstream file(filename, ios::app);
+        ((file << *vars << " "), ...);
+        file << "\n";
+        file.close();
     }
 
-    void display()
+    template<typename... Args>
+    static void Read(const string& filename, Args*... vars) {
+        ifstream file(filename);
+        string line;
+        if (getline(file, line)) {
+            istringstream iss(line);
+            ((iss >> *vars), ...);
+        }
+        file.close();
+    }
+
+    template<typename T>
+    static void Fetch(const string& filename, vector<T>& Vector)
     {
-        for (const auto& member: members)
-        {
-            cout << *member << endl;
+        ifstream file(filename);
+        Vector.clear();
+        T temp;
+        while (file >> temp) {
+            Vector.push_back(temp);
+        }
+        file.close();
+    }
+
+    static void Log(const string& filename)
+    {
+        ifstream file(filename);
+        string line;
+        while (getline(file, line)) {
+            cout << line << endl;
         }
     }
-    ~Files(){};
-};
+
+//};
