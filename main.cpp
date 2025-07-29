@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 class App : public wxApp
 {
 public:
@@ -122,7 +121,7 @@ void Frame::OnCreateProfile(wxCommandEvent& event)
     string contact = contactCtrl->GetValue().ToStdString();
     string description = descriptionCtrl->GetValue().ToStdString();
 
-    Write("profile", &name, &contact, &description);
+    Write("profile", name, contact, description);
     wxMessageBox("Profile created successfully!", "Success", wxOK | wxICON_INFORMATION);
 }
 
@@ -172,5 +171,3 @@ int main()
 
     return 0;
 }*/
-
-
